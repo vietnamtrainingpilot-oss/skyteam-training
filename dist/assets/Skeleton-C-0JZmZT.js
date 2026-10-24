@@ -1,1 +1,0 @@
-import{j as a,c as r}from"./index-D8PjhS4W.js";function t({className:e,...n}){return a.jsxDEV("div",{className:r("animate-pulse rounded-md bg-[var(--color-separator)]",e),...n},void 0,!1,{fileName:"D:/Skyteam Training/skyteam-training/src/components/ui/Skeleton.tsx",lineNumber:6,columnNumber:5},this)}export{t as S};
