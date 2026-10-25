@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SkyTeam Training</title>
+  <title>SkyTeam Training — Redirecting</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #fafaf8; font-family: 'Outfit', system-ui, sans-serif; color: #1a1a18; }
+    .container { text-align: center; }
+    .spinner { width: 40px; height: 40px; border: 3px solid #e2e8f0; border-top-color: #b8760e; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
-  <script>window.location.href='/skyteam-training/'</script>
+  <div class="container">
+    <div class="spinner"></div>
+    <p>Loading SkyTeam Training...</p>
+  </div>
+  <script>
+    // Force redirect to index.html so React Router handles SPA routing
+    window.location.href = '/skyteam-training/';
+  </script>
 </body>
 </html>
