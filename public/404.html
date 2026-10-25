@@ -39,8 +39,19 @@
   <div class="container">
     <h1>404</h1>
     <p>This page doesn't exist. Head back to training.</p>
-    <a href="/">← Back to Home</a>
+    <a href="/skyteam-training/">← Back to Home</a>
   </div>
-  <script>history.replaceState(null, null, window.location.pathname);</script>
+  <script>
+    // SPA fallback for GitHub Pages: redirect to index.html with the original path preserved
+    var path = window.location.pathname;
+    // Remove /skyteam-training prefix for the replaceState
+    if (path.startsWith('/skyteam-training')) {
+      path = path.replace('/skyteam-training', '');
+    }
+    // Store the path in sessionStorage so index.html can restore it
+    sessionStorage.setItem('spa-fallback-path', path);
+    // Redirect to index.html
+    window.location.href = '/skyteam-training/';
+  </script>
 </body>
 </html>
