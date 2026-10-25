@@ -1,6 +1,0 @@
-{
-  "version": 1,
-  "routes": [
-    { "route": "/*", "destination": "/index.html" }
-  ]
-}
