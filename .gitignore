@@ -23,5 +23,9 @@ Thumbs.db
 *.log
 npm-debug.log*
 
+# Test results
+test-results/
+playwright-report/
+
 # Artifacts
 ptc-training-main/
