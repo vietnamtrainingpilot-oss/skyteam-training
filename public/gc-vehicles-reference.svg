@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" rx="8" fill="#f8f9fa"/>
+  <text x="400" y="30" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" text-anchor="middle" fill="#1a1a18">Ground Crew Vehicle Reference Guide</text>
+  <text x="400" y="52" font-family="Inter, system-ui, sans-serif" font-size="12" text-anchor="middle" fill="#6b6b64">All required vehicles for standard narrow-body operations</text>
+
+  <rect x="60" y="80" width="140" height="340" rx="6" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+  <text x="130" y="105" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#b4870e">Baggage Truck</text>
+  <rect x="100" y="120" width="28" height="14" fill="#f59e0b" rx="2"/>
+  <circle cx="114" cy="127" r="5" fill="#d97706"/>
+  <circle cx="146" cy="127" r="5" fill="#d97706"/>
+  <path d="M108,140 L114,150 L124,140 Z" fill="#d97706"/>
+  <text x="130" y="175" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Transport luggage to/from aircraft</text>
+  <text x="130" y="192" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Right back of plane</text>
+  <text x="130" y="209" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Check-in → boarding start</text>
+  <text x="130" y="226" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Removed when boarding done</text>
+  <text x="130" y="243" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Every flight needs one</text>
+
+  <rect x="220" y="80" width="140" height="340" rx="6" fill="#dcfce7" stroke="#4ade80" stroke-width="2"/>
+  <text x="290" y="105" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">Fuel Truck</text>
+  <rect x="260" y="120" width="22" height="8" fill="#22c55e" rx="1"/>
+  <rect x="268" y="130" width="14" height="10" fill="#16a34a" rx="1"/>
+  <path d="M272,140 L282,135 L282,150 Z" fill="#16a34a"/>
+  <circle cx="280" cy="128" r="3" fill="#16a34a"/>
+  <text x="290" y="175" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Supplies aviation fuel</text>
+  <text x="290" y="192" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Next to right wing</text>
+  <text x="290" y="209" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Not under wing</text>
+  <text x="290" y="226" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Check-in → boarding done</text>
+  <text x="290" y="243" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Every flight needs one</text>
+
+  <rect x="400" y="80" width="140" height="340" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"/>
+  <text x="470" y="105" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#0284c7">Stair Truck</text>
+  <rect x="445" y="120" width="14" height="26" fill="#7dd3fc"/>
+  <polygon points="459,148 480,138 480,158" fill="#0ea5e9"/>
+  <path d="M450,120 L465,112 L475,112 L490,120 Z" fill="#0284c7"/>
+  <text x="470" y="175" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Passengers board</text>
+  <text x="470" y="192" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Staff access</text>
+  <text x="470" y="209" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Front left door</text>
+  <text x="470" y="226" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Boarding start → done</text>
+  <text x="470" y="243" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• No jetway flights</text>
+
+  <rect x="580" y="80" width="140" height="340" rx="6" fill="#a78bfa" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="650" y="105" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#5b21b6">Catering Truck</text>
+  <rect x="620" y="120" width="24" height="12" fill="#c4b5fd"/>
+  <rect x="632" y="134" width="12" height="8" fill="#a78bfa"/>
+  <circle cx="644" cy="140" r="3" fill="#8b5cf6"/>
+  <text x="650" y="175" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Food & drinks</text>
+  <text x="650" y="192" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Front right door</text>
+  <text x="650" y="209" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• During check-in</text>
+  <text x="650" y="226" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Boarding done</text>
+  <text x="650" y="243" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="middle" fill="#475569">• Flights >1hr</text>
+
+  <rect x="60" y="440" width="140" height="35" rx="6" fill="#fb923c" stroke="#f97316" stroke-width="2"/>
+  <text x="130" y="465" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#b4520e">Terminal Bus</text>
+  <circle cx="115" cy="450" r="5" fill="#ea580c"/>
+  <path d="M145,440 L152,435 L152,450 Z" fill="#ea580c"/>
+  <text x="130" y="480" font-family="Inter, system-ui, sans-serif" font-size="10" text-anchor="middle" fill="#475569">Moves passengers when no gate/jetway</text>
+
+  <rect x="300" y="440" width="140" height="35" rx="6" fill="#ec4899" stroke="#db2777" stroke-width="2"/>
+  <text x="370" y="465" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#be123c">Pushback Tug</text>
+  <polygon points="355,445 385,445 390,455 350,455" fill="#db2777"/>
+  <rect x="362" y="460" width="16" height="8" fill="#db2777"/>
+  <text x="370" y="480" font-family="Inter, system-ui, sans-serif" font-size="10" text-anchor="middle" fill="#475569">Push aircraft backward — front of plane</text>
+</svg>
