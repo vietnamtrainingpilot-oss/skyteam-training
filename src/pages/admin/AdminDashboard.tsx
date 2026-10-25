@@ -344,7 +344,6 @@ export function AdminDashboard() {
                         <option value="FLIGHT_DECK">Flight Deck</option>
                         <option value="CABIN_CREW">Cabin Crew</option>
                         <option value="GROUND_CREW">Ground Crew</option>
-                        <option value="SHARED_CORE">Shared Core</option>
                       </select>
                     </div>
                   </div>

@@ -1,10 +1,9 @@
-import { Plane, Users, Shield, Globe } from 'lucide-react'
+import { Plane, Users, Shield } from 'lucide-react'
 
 export const DEPARTMENTS = {
   FLIGHT_DECK: 'FLIGHT_DECK',
   CABIN_CREW: 'CABIN_CREW',
-  GROUND_CREW: 'GROUND_CREW',
-  SHARED_CORE: 'SHARED_CORE'
+  GROUND_CREW: 'GROUND_CREW'
 } as const
 
 export type Department = typeof DEPARTMENTS[keyof typeof DEPARTMENTS]
@@ -12,15 +11,13 @@ export type Department = typeof DEPARTMENTS[keyof typeof DEPARTMENTS]
 export const ROLE_COLORS: Record<Department, string> = {
   FLIGHT_DECK: '#0066cc',
   CABIN_CREW: '#30a46c',
-  GROUND_CREW: '#d4a843',
-  SHARED_CORE: '#7c3aed'
+  GROUND_CREW: '#d4a843'
 }
 
 export const ROLE_NAMES: Record<Department, string> = {
   FLIGHT_DECK: 'Flight Deck',
   CABIN_CREW: 'Cabin Crew',
-  GROUND_CREW: 'Ground Crew',
-  SHARED_CORE: 'Shared Core'
+  GROUND_CREW: 'Ground Crew'
 }
 
 export const ROLES = {
@@ -60,13 +57,6 @@ export const departmentInfo: Record<Department, DepartmentInfo> = {
     icon: Shield,
     color: '#d97706',
     description: 'Master airport operations, vehicle handling, and ground procedures.'
-  },
-  SHARED_CORE: {
-    id: 'SHARED_CORE',
-    name: 'Shared Core',
-    icon: Globe,
-    color: '#7c3aed',
-    description: 'Essential training applicable to all departments.'
   }
 }
 

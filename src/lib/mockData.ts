@@ -99,7 +99,7 @@ export const users: User[] = [
     email: 'vietnamtrainingpilot@gmail.com',
     name: 'Nguyen Huu Khoi Nguyen',
     role: 'ADMIN',
-    department: 'SHARED_CORE',
+    department: 'FLIGHT_DECK',
     airline: 'Vietnam Training Pilot',
     discord: 'khoinguyen#0001',
     region: 'Asia',
@@ -191,11 +191,7 @@ export const studyGuideSections: Record<Department, StudyGuideSection[]> = {
     { id: 'gc-sg2', title: 'Aircraft Setup', order: 2, content: '**Information:** This is the most important part of the flight as Ground Crew. The cones and ground crew vehicles should be placed in their correct positions, and all operations must be carried out correctly.\n\n### Baggage Truck\n- **What is it:** A vehicle used for transporting luggage to the plane\n- **When to use:** Check-in is completed, boarding has started, and it is removed when boarding is completed\n- **Where to place:** At the right back part of the plane for all planes, and an additional one at the front right part of the plane if using widebody planes\n- **How often:** Every flight must have it\n\n### Catering Truck\n- **What is it:** A vehicle used for providing services like food and drinks\n- **When to use:** During check-in, and removed when boarding is completed\n- **Where to place:** Front right door, and 1 additional at the right back door if using widebodies\n- **How often:** Flights that are over 1 hour long\n\n### Stair Truck\n- **What is it:** A vehicle used to help passengers board the plane if not using the gate, or for staff to get on the plane\n- **When to use:** When boarding starts (on the bus) and only for flights that do not use a jetway, or check-in, and removed when boarding is completed.\n- **Where to place:** Front left door, and 1 additional at the left back door if using widebodies (if not using jetway), or one at the left back door if using jetway.\n- **How often:** Every time for flights that do not use a jetway, or are in a stand\n\n### Fuel Truck\n- **What is it:** A vehicle used to supply fuel to the plane\n- **When to use:** Check-in starts, and removed when boarding is completed\n- **Where to place:** Next to the right wing, not under\n- **How often:** Every flight, and use a large fuel truck for widebodies and a small one for narrow-body planes\n\n### Terminal Bus\n- **What is it:** A vehicle used for moving passengers to board the plane if not using the gate\n- **When to use:** Drive to bus stand when check-in starts, and drive away when everyone has left the plane\n- **Where to place:** Bus stand\n- **How often:** Every time for flights that do not use a jetway, or are in a stand\n\n### Pushback Tug\n- **What is it:** A vehicle used for pushing back the plane\n- **When to use:** All cones and ground crew vehicles are removed\n- **Where to place:** Front of the plane, heading the same direction as the plane\n- **How often:** Every time for flights — ask the pilot for tail heading directions.\n\n![Ground crew vehicle placement guide — top-down view showing all vehicle positions](/gc-aircraft-setup.svg)\n\n![Ground crew vehicle reference guide — all required vehicles for narrow-body operations](/gc-vehicles-reference.svg)' },
     { id: 'gc-sg3', title: 'Cone Placement', order: 3, content: `Cone placement is necessary because it will mark the zones that we should not go to. We will place cones like this because it applies to all planes. Place the cone for departure in the prep time and remove it before departure. Only place the cones when the engine has stopped operating.\n\n![Ground crew cone placement — side view pattern](/gc-cone-placement-diagram.svg)\n\n![Ground crew cone placement — front positioning](/gc-cone-placement-diagram.svg)\n\n![Ground crew cone placement — rear configuration](/gc-rear-cone-config.svg)\n\n![Ground crew complete vehicle and cone setup](/gc-aircraft-setup.svg)` }
   ],
-  SHARED_CORE: [
-    { id: 'sc-sg1', title: 'Alliance Overview', order: 1, content: 'SkyTeam Alliance training covers essential communication protocols and procedures shared across all departments. Understanding these common standards ensures smooth coordination between Flight Deck, Cabin Crew, and Ground Crew operations.' },
-    { id: 'sc-sg2', title: 'Inter-Department Communication', order: 2, content: 'Effective communication between departments is critical. Flight Deck coordinates with Ground Crew for pushback and taxi instructions, Cabin Crew coordinates with Flight Deck for service timing and passenger updates, and all departments follow standard radio procedures.' },
-    { id: 'sc-sg3', title: 'Safety Standards', order: 3, content: 'All personnel must adhere to universal safety protocols including emergency response procedures, security protocols, and hazard identification. Regular safety drills and updates ensure operational readiness across all departments.' }
-  ]
+  SHARED_CORE: []
 }
 
 // Assessment questions from PTC Examination files
@@ -863,42 +859,4 @@ export const courses: Course[] = [
       }
     ]
   },
-  {
-    id: 'sc-shared',
-    title: 'Shared Core Training',
-    description: 'Essential training applicable to all departments including alliance procedures and communication standards.',
-    department: 'SHARED_CORE',
-    icon: 'globe',
-    progress: 0,
-    status: 'not-started',
-    modules: [
-      {
-        id: 'sc-m1',
-        title: 'Alliance Overview',
-        description: 'Understand SkyTeam Alliance operations and shared procedures.',
-        lessons: [
-          { id: 'sc-l1', title: 'SkyTeam Alliance', type: 'reading', duration: '15 min', content: 'SkyTeam Alliance coordinates operations across multiple virtual airlines. All personnel must understand standard communication protocols.' },
-          { id: 'sc-l2', title: 'Inter-Department Communication', type: 'reading', duration: '10 min', content: 'Flight Deck coordinates with Ground Crew for pushback. Cabin Crew coordinates with Flight Deck for service timing. All departments follow standard radio procedures.' }
-        ]
-      },
-      {
-        id: 'sc-m2',
-        title: 'Safety Standards',
-        description: 'Universal safety protocols applicable to all departments.',
-        lessons: [
-          { id: 'sc-l3', title: 'General Safety Protocols', type: 'reading', duration: '20 min', content: 'All personnel must adhere to emergency response procedures, security protocols, and hazard identification standards.' },
-          { id: 'sc-l4', title: 'Emergency Procedures', type: 'video', duration: '25 min', content: 'Regular safety drills and updates ensure operational readiness across all departments.' }
-        ]
-      },
-      {
-        id: 'sc-m3',
-        title: 'Final Assessment',
-        description: 'Complete shared core evaluation.',
-        lessons: [
-          { id: 'sc-l5', title: 'Written Exam', type: 'quiz', duration: '20 min', content: 'Shared core written exam covering alliance procedures and safety standards.' },
-          { id: 'sc-l6', title: 'Practical Evaluation', type: 'quiz', duration: '30 min', content: 'Practical evaluation for shared core competencies.' }
-        ]
-      }
-    ]
-  }
 ]
