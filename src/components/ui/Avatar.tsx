@@ -1,34 +1,38 @@
 import React from 'react'
 import { cn } from '../../lib/utils'
 
-interface AvatarProps {
-  src?: string | null
-  alt: string
-  fallback?: string
-  size?: 'sm' | 'md' | 'lg'
-  className?: string
+interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+  src?: string
+  alt?: string
+  name?: string
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
 export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  ({ src, alt, fallback, size = 'md', className }, ref) => {
-    const sizes = {
-      sm: 'h-8 w-8 text-xs',
-      md: 'h-10 w-10 text-sm',
-      lg: 'h-12 w-12 text-base'
+  ({ className, src, alt, name, size = 'md', ...props }, ref) => {
+    const sizeClasses = {
+      xs: 'h-6 w-6 text-xs',
+      sm: 'h-8 w-8 text-sm',
+      md: 'h-10 w-10 text-base',
+      lg: 'h-12 w-12 text-lg',
+      xl: 'h-16 w-16 text-xl'
     }
-
-    const initials = fallback || alt.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
 
     return (
       <div
         ref={ref}
-        className={cn('relative flex shrink-0 overflow-hidden rounded-full bg-[var(--color-primary-light)] items-center justify-center', sizes[size], className)}
+        className={cn(
+          'relative flex-shrink-0 rounded-full overflow-hidden bg-[var(--color-primary)] text-white flex items-center justify-center font-medium',
+          sizeClasses[size],
+          className
+        )}
+        {...props}
       >
         {src ? (
-          <img src={src} alt={alt} className="h-full w-full object-cover" />
-        ) : (
-          <span className="font-medium text-[var(--color-primary)]">{initials}</span>
-        )}
+          <img src={src} alt={alt || name || ''} className="h-full w-full object-cover" />
+        ) : name ? (
+          name.split(' ').map(n => n[0]).join('').slice(0, 2)
+        ) : null}
       </div>
     )
   }

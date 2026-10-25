@@ -18,17 +18,20 @@ export async function signIn(email: string, _password: string): Promise<{ user: 
   return api({ user: users[0] })
 }
 
-export async function signUp(data: { email: string; name: string; department: string }): Promise<{ user: User }> {
+export async function signUp(data: { email: string; name: string; department: string; password?: string; role?: string; airline?: string; discord?: string; region?: string; experience?: string; heardAbout?: string }): Promise<{ user: User }> {
   const newUser: User = {
     id: String(users.length + 1),
     email: data.email,
     name: data.name,
-    role: 'TRAINEE',
+    role: (data.role || 'TRAINEE') as any,
     department: data.department as any,
-    airline: 'SkyTeam Aviation',
+    airline: data.airline || 'SkyTeam Aviation',
+    discord: data.discord || '',
+    region: data.region || 'North America',
     avatar: null,
     progress: 0,
-    joinedDate: new Date().toISOString().split('T')[0]
+    joinedDate: new Date().toISOString().split('T')[0],
+    onboarded: true
   }
   return api({ user: newUser })
 }

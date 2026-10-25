@@ -1,77 +1,61 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useToast } from '../../hooks/useToast'
-import { Input } from '../../components/ui/Input'
-import { Button } from '../../components/ui/Button'
 import { AuthLayout } from '../../components/layout/AuthLayout'
+import { Button } from '../../components/ui/Button'
+import { Input } from '../../components/ui/Input'
+import { CheckCircle, ArrowLeft } from 'lucide-react'
 
 export function ForgotPassword() {
-  const { toast } = useToast()
   const [email, setEmail] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [sent, setSent] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!email) return
-
-    setIsLoading(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setIsLoading(false)
-    setSent(true)
-    toast('Password reset link sent to your email', 'success')
+    setError('')
+    if (!email) { setError('Please enter your email') ; return }
+    setSubmitted(true)
   }
 
   return (
     <AuthLayout
-      title="Reset password"
-      subtitle="Enter your email and we'll send you a reset link"
+      title={submitted ? 'Check your email' : 'Reset password'}
+      subtitle={submitted ? 'We sent a reset link to your inbox' : 'Enter your email to receive a password reset link'}
     >
-      {sent ? (
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-            <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
+      {submitted ? (
+        <div className="text-center py-4">
+          <div className="w-14 h-14 rounded-full bg-[var(--color-success)]/10 flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="h-7 w-7 text-[var(--color-success)]" />
           </div>
-          <p className="text-[var(--color-muted)]">
-            Check your email for the password reset link.
+          <p className="text-sm text-[var(--color-muted)]">
+            If an account exists for <strong className="text-[var(--color-fg)]">{email}</strong>, you'll receive a reset link shortly.
           </p>
-          <Link
-            to="/auth/signin"
-            className="inline-flex text-[var(--color-primary)] hover:underline"
-          >
-            Back to sign in
+          <Link to="/auth/signin" className="mt-6 inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:underline font-medium">
+            <ArrowLeft className="h-4 w-4" /> Back to sign in
           </Link>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1.5">
-              Email Address
-            </label>
+            <label htmlFor="email" className="block text-sm font-medium mb-1.5">Email Address</label>
             <Input
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Enter your registered email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
             />
           </div>
-
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Sending...' : 'Send Reset Link'}
-          </Button>
+          {error && <p className="text-sm text-[var(--color-error)]">{error}</p>}
+          <Button type="submit" className="w-full">Send Reset Link</Button>
+          <p className="text-center text-sm text-[var(--color-muted)]">
+            <Link to="/auth/signin" className="text-[var(--color-primary)] hover:underline font-medium">
+              ← Back to sign in
+            </Link>
+          </p>
         </form>
       )}
-
-      <p className="text-center text-sm text-[var(--color-muted)]">
-        <Link to="/auth/signin" className="text-[var(--color-primary)] hover:underline">
-          Back to sign in
-        </Link>
-      </p>
     </AuthLayout>
   )
 }

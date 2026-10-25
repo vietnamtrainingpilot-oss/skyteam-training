@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
-import { ROLES } from '../lib/constants'
+import { ROLES, Department, Role } from '../lib/constants'
 import { supabase, signIn as apiSignIn, signUp as apiSignUp, getSession as apiGetSession } from '../lib/supabase-api'
+import { OnboardingData } from '../lib/supabase-api'
 import { User } from '../lib/mockData'
 
 interface AuthState {
@@ -18,8 +19,9 @@ type AuthAction =
 
 interface AuthContextType extends AuthState {
   signIn: (email: string, password: string) => Promise<void>
-  signUp: (data: { email: string; name: string; department: string }) => Promise<void>
+  signUp: (data: OnboardingData) => Promise<void>
   signOut: () => void
+  updateOnboarding: (data: Partial<User>) => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -60,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const signUp = async (data: { email: string; name: string; department: string }) => {
+  const signUp = async (data: OnboardingData) => {
     dispatch({ type: 'LOGIN_START' })
     try {
       const result = await apiSignUp(data)
@@ -79,10 +81,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'LOGOUT' })
   }
 
+  const updateOnboarding = (data: Partial<User>) => {
+    dispatch({ type: 'UPDATE_USER', user: data })
+  }
+
   // Initialize auth state from session
   useEffect(() => {
     apiGetSession().then(result => {
-      dispatch({ type: result.user ? 'LOGIN_SUCCESS' : 'LOGIN_FAILURE', user: result.user || { id: '', email: '', name: '', role: 'TRAINEE', department: 'SHARED_CORE', airline: '', avatar: null, progress: 0, joinedDate: new Date().toISOString().split('T')[0] } as User })
+      dispatch({ type: result.user ? 'LOGIN_SUCCESS' : 'LOGIN_FAILURE', user: result.user || { id: '', email: '', name: '', role: 'TRAINEE' as Role, department: 'FLIGHT_DECK' as Department, airline: '', discord: '', region: '', experience: '', heardAbout: '', avatar: null, progress: 0, joinedDate: new Date().toISOString().split('T')[0], onboarded: true } as User })
     }).catch(() => {
       dispatch({ type: 'LOGIN_FAILURE' })
     })
@@ -93,7 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: any) => {
       if (session?.user) {
         apiGetSession().then(result => {
-          dispatch({ type: result.user ? 'LOGIN_SUCCESS' : 'LOGIN_FAILURE', user: result.user || { id: '', email: '', name: '', role: 'TRAINEE', department: 'SHARED_CORE', airline: '', avatar: null, progress: 0, joinedDate: new Date().toISOString().split('T')[0] } as User })
+          dispatch({ type: result.user ? 'LOGIN_SUCCESS' : 'LOGIN_FAILURE', user: result.user || { id: '', email: '', name: '', role: 'TRAINEE' as Role, department: 'FLIGHT_DECK' as Department, airline: '', discord: '', region: '', experience: '', heardAbout: '', avatar: null, progress: 0, joinedDate: new Date().toISOString().split('T')[0], onboarded: true } as User })
         })
       } else {
         dispatch({ type: 'LOGOUT' })
@@ -103,7 +109,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ ...state, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ ...state, signIn, signUp, signOut, updateOnboarding }}>
       {children}
     </AuthContext.Provider>
   )

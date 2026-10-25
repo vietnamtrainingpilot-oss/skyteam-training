@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Menu, X, Plane, LogOut, User } from 'lucide-react'
+import { Menu, X, Plane } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth'
 import { DepartmentBadge } from '../features/DepartmentBadge'
 import { ThemeToggle } from '../ui/ThemeToggle'
+import { departmentInfo } from '../../lib/constants'
 
 export function Header() {
   const { user, signOut } = useAuth()
@@ -11,48 +12,66 @@ export function Header() {
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  const deptMeta = user ? departmentInfo[user.department as keyof typeof departmentInfo] : null
+
   const handleSignOut = () => {
     signOut()
     navigate('/auth/signin')
     setMobileMenuOpen(false)
   }
 
-  const isPublicPage = ['/', '/courses', '/courses/:id', '/assessments', '/assessments/:id'].some(
-    route => location.pathname === route || location.pathname.startsWith(route)
-  )
+  const isPublicPage = location.pathname === '/'
 
   if (!user || isPublicPage) return null
 
   const navLinks = [
     { label: 'Dashboard', path: '/dashboard' },
-    { label: 'Courses', path: '/courses' },
-    { label: 'Assessments', path: '/assessments' }
+    { label: 'Handbooks', path: '/handbooks' },
+    { label: 'Stage Testing', path: '/stage-testing' }
   ]
 
+  if (user.role === 'TRAINER' || user.role === 'ADMIN') {
+    navLinks.push({ label: 'Trainer', path: '/trainer' })
+  }
+  if (user.role === 'TRAINER' || user.role === 'ADMIN') {
+    navLinks.push({ label: 'Training Info', path: '/training-information' })
+  }
   if (user.role === 'ADMIN') {
     navLinks.push({ label: 'Admin', path: '/admin' })
   }
-  if (user.role === 'TRAINER') {
-    navLinks.push({ label: 'Trainer', path: '/trainer' })
-  }
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-bg)]/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 font-semibold text-lg">
-          <Plane className="h-6 w-6 text-[var(--color-primary)]" />
+    <header
+      className="sticky top-0 z-40 w-full border-b backdrop-blur supports-[backdrop-filter]:bg-opacity-80"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+        boxShadow: '0 1px 0 var(--color-border-soft)'
+      }}
+    >
+      <div className="mx-auto px-4 h-14 flex items-center justify-between max-w-screen-2xl">
+        <Link to="/" className="flex items-center gap-2.5 font-semibold text-sm tracking-tight" style={{ color: 'var(--color-fg)' }}>
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center shadow-sm"
+            style={{ backgroundColor: deptMeta?.color || 'var(--color-primary)' }}
+          >
+            <Plane className="h-3.5 w-3.5" style={{ color: 'var(--color-fg)', fill: 'none' }} />
+          </div>
           <span>SkyTeam Training</span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-1">
           {navLinks.map(link => (
             <Link
               key={link.path}
               to={link.path}
-              className={`text-sm font-medium transition-colors hover:text-[var(--color-primary)] ${
-                location.pathname === link.path ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'
-              }`}
+              aria-current={location.pathname === link.path ? 'page' : undefined}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-150 ${
+                location.pathname === link.path
+                  ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)]'
+                  : 'text-[var(--color-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]'
+              }}`}
             >
               {link.label}
             </Link>
@@ -61,28 +80,32 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <DepartmentBadge department={user.department} size="sm" />
+          {deptMeta && <DepartmentBadge department={user.department} size="sm" />}
           <Link
             to="/profile"
-            className="flex items-center gap-2 rounded-lg hover:bg-[var(--color-bg-secondary)] px-2 py-1.5 transition-colors"
+            className="flex items-center gap-2.5 rounded-xl px-2 py-1.5 transition-all text-[var(--color-muted)] hover:bg-[var(--color-surface-hover)]"
           >
             <div className="hidden sm:block text-right">
-              <p className="text-sm font-medium">{user.name}</p>
-              <p className="text-xs text-[var(--color-muted)] capitalize">{user.role.toLowerCase()}</p>
+              <p className="text-sm font-medium leading-none" style={{ color: 'var(--color-fg)' }}>{user.name}</p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--color-muted)' }}>{user.role.toLowerCase()}</p>
             </div>
-            <div className="h-8 w-8 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center text-sm font-medium">
+            <div
+              className="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-semibold shadow-sm"
+              style={{ backgroundColor: `${deptMeta?.color || 'var(--color-primary)'}18`, color: deptMeta?.color || 'var(--color-primary)' }}
+            >
               {user.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
             </div>
           </Link>
           <button
             onClick={handleSignOut}
-            className="rounded-lg p-2 text-[var(--color-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-bg-secondary)] transition-colors"
+            className="rounded-xl p-2 transition-all text-[var(--color-muted)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-error)]"
             aria-label="Sign out"
           >
-            <LogOut className="h-5 w-5" />
+            <Plane className="h-4 w-4 rotate-180" />
           </button>
           <button
-            className="md:hidden rounded-lg p-2 text-[var(--color-muted)] hover:text-[var(--color-fg)]"
+            className="md:hidden rounded-xl p-2 transition-all"
+            style={{ color: 'var(--color-muted)' }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -91,40 +114,41 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]">
-          <div className="container mx-auto px-4 py-4 space-y-2">
-            {navLinks.map(link => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === link.path
-                    ? 'bg-[var(--color-primary-light)] text-[var(--color-primary)]'
-                    : 'text-[var(--color-muted)] hover:bg-[var(--color-bg-secondary)]'
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div
+          className="md:hidden border-t px-4 py-3 space-y-1"
+          style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+        >
+          {navLinks.map(link => (
             <Link
-              to="/profile"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-muted)] hover:bg-[var(--color-bg-secondary)] transition-colors"
+              key={link.path}
+              to={link.path}
+              className="block px-3 py-2.5 rounded-lg text-sm font-medium transition-all"
+              style={{
+                color: location.pathname === link.path
+                  ? (deptMeta?.color || 'var(--color-primary)')
+                  : 'var(--color-muted)',
+                backgroundColor: location.pathname === link.path ? `${deptMeta?.color || 'var(--color-primary)'}10` : 'transparent'
+              }}
               onClick={() => setMobileMenuOpen(false)}
             >
-              <User className="h-5 w-5" />
-              Profile
+              {link.label}
             </Link>
-            <button
-              onClick={handleSignOut}
-              className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-error)] hover:bg-red-50 transition-colors"
-            >
-              <LogOut className="h-5 w-5" />
-              Sign Out
-            </button>
-          </div>
+          ))}
+          <Link
+            to="/profile"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-muted)] hover:bg-[var(--color-surface-hover)] transition-colors block"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Profile
+          </Link>
+          <button
+            onClick={handleSignOut}
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            style={{ color: 'var(--color-error)' }}
+          >
+            Sign Out
+          </button>
         </div>
       )}
     </header>

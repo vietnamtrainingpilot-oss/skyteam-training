@@ -1,3 +1,5 @@
+import { Plane, Users, Shield, Globe } from 'lucide-react'
+
 export const DEPARTMENTS = {
   FLIGHT_DECK: 'FLIGHT_DECK',
   CABIN_CREW: 'CABIN_CREW',
@@ -28,3 +30,44 @@ export const ROLES = {
 } as const
 
 export type Role = typeof ROLES[keyof typeof ROLES]
+
+export interface DepartmentInfo {
+  id: Department
+  name: string
+  icon: React.ElementType
+  color: string
+  description: string
+}
+
+export const departmentInfo: Record<Department, DepartmentInfo> = {
+  FLIGHT_DECK: {
+    id: 'FLIGHT_DECK',
+    name: 'Flight Deck',
+    icon: Plane,
+    color: '#0f52ba',
+    description: 'Master flight operations, navigation, and aircraft handling.'
+  },
+  CABIN_CREW: {
+    id: 'CABIN_CREW',
+    name: 'Cabin Crew',
+    icon: Users,
+    color: '#059669',
+    description: 'Learn passenger service, safety protocols, and in-flight procedures.'
+  },
+  GROUND_CREW: {
+    id: 'GROUND_CREW',
+    name: 'Ground Crew',
+    icon: Shield,
+    color: '#d97706',
+    description: 'Master airport operations, vehicle handling, and ground procedures.'
+  },
+  SHARED_CORE: {
+    id: 'SHARED_CORE',
+    name: 'Shared Core',
+    icon: Globe,
+    color: '#7c3aed',
+    description: 'Essential training applicable to all departments.'
+  }
+}
+
+export const departments = Object.values(departmentInfo)

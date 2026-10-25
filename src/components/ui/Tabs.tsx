@@ -1,57 +1,83 @@
 import React, { createContext, useContext, useState } from 'react'
 import { cn } from '../../lib/utils'
 
-interface TabsContextType {
+interface TabsContextValue {
   value: string
   onValueChange: (value: string) => void
 }
 
-const TabsContext = createContext<TabsContextType>({ value: '', onValueChange: () => {} })
+const TabsContext = createContext<TabsContextValue | undefined>(undefined)
 
-export function Tabs({ value: propValue, defaultValue, onValueChange, children }: { value?: string; defaultValue?: string; onValueChange?: (v: string) => void; children: React.ReactNode }) {
-  const [internalValue, setInternalValue] = useState(propValue || defaultValue || '')
-  const currentValue = propValue !== undefined ? propValue : internalValue
+export function Tabs({ value, defaultValue, onValueChange, children }: {
+  value?: string
+  defaultValue?: string
+  onValueChange?: (value: string) => void
+  children: React.ReactNode
+}) {
+  const [internalValue, setInternalValue] = useState(value || defaultValue || '')
+  const currentValue = value !== undefined ? value : internalValue
+
   return (
-    <TabsContext.Provider value={{ value: currentValue, onValueChange: onValueChange || setInternalValue }}>
+    <TabsContext.Provider value={{
+      value: currentValue,
+      onValueChange: onValueChange || setInternalValue
+    }}>
       <div className="space-y-4">{children}</div>
     </TabsContext.Provider>
   )
 }
 
-export function TabsList({ children, className }: { children: React.ReactNode; className?: string }) {
+export function TabsList({ className, children }: React.HTMLAttributes<HTMLDivElement>) {
+  const ctx = useContext(TabsContext)
+  if (!ctx) throw new Error('TabsList must be used within Tabs')
+
   return (
-    <div className={cn('inline-flex h-10 items-center justify-center rounded-lg bg-[var(--color-bg-secondary)] p-1', className)}>
+    <div
+      className={cn(
+        'flex items-center space-x-1 rounded-lg bg-[var(--color-surface-hover)] p-1',
+        className
+      )}
+    >
       {children}
     </div>
   )
 }
 
-export function TabsTrigger({ value, children, className }: { value: string; children: React.ReactNode; className?: string }) {
-  const { value: activeValue, onValueChange } = useContext(TabsContext)
-  const isActive = activeValue === value
+export function TabsTrigger({
+  className,
+  value,
+  children,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { value: string }) {
+  const ctx = useContext(TabsContext)
+  if (!ctx) throw new Error('TabsTrigger must be used within Tabs')
 
   return (
     <button
-      onClick={() => onValueChange(value)}
+      type="button"
       className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-        isActive ? 'bg-[var(--color-bg)] text-[var(--color-fg)] shadow-sm' : 'text-[var(--color-muted)] hover:text-[var(--color-fg)]',
+        'inline-flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-all',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]',
+        ctx.value === value
+          ? 'bg-[var(--color-accent)] text-white shadow-sm'
+          : 'text-[var(--color-fg-secondary)] hover:bg-[var(--color-border)] hover:text-[var(--color-fg)]',
         className
       )}
+      onClick={() => ctx.onValueChange(value)}
+      {...props}
     >
       {children}
     </button>
   )
 }
 
-export function TabsContent({ value, children, className }: { value: string; children: React.ReactNode; className?: string }) {
-  const { value: activeValue } = useContext(TabsContext)
+export function TabsContent({ className, value, children }: React.HTMLAttributes<HTMLDivElement> & { value: string }) {
+  const ctx = useContext(TabsContext)
+  if (!ctx) throw new Error('TabsContent must be used within Tabs')
 
-  if (activeValue !== value) return null
+  if (ctx.value !== value) return null
 
   return (
-    <div className={cn('mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2', className)}>
-      {children}
-    </div>
+    <div className={cn('pt-2', className)}>{children}</div>
   )
 }

@@ -8,10 +8,7 @@ import { AuthLayout } from '../../components/layout/AuthLayout'
 export function Signin() {
   const { signIn, isLoading } = useAuth()
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  })
+  const [formData, setFormData] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +40,7 @@ export function Signin() {
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1.5">
-            Email Address
-          </label>
+          <label htmlFor="email" className="block text-sm font-medium mb-1.5">Email Address</label>
           <Input
             id="email"
             name="email"
@@ -56,11 +51,8 @@ export function Signin() {
             required
           />
         </div>
-
         <div>
-          <label htmlFor="password" className="block text-sm font-medium mb-1.5">
-            Password
-          </label>
+          <label htmlFor="password" className="block text-sm font-medium mb-1.5">Password</label>
           <Input
             id="password"
             name="password"
@@ -71,25 +63,19 @@ export function Signin() {
             required
           />
         </div>
-
         <div className="flex items-center justify-between">
-          <Link to="/auth/forgot" className="text-sm text-[var(--color-primary)] hover:underline">
+          <Link to="/auth/forgot" className="text-sm text-[var(--color-primary)] hover:underline font-medium">
             Forgot password?
           </Link>
         </div>
-
-        {error && (
-          <p className="text-sm text-[var(--color-error)]">{error}</p>
-        )}
-
+        {error && <p className="text-sm text-[var(--color-error)]">{error}</p>}
         <Button type="submit" className="w-full" disabled={isLoading}>
           {isLoading ? 'Signing in...' : 'Sign In'}
         </Button>
       </form>
-
       <p className="text-center text-sm text-[var(--color-muted)]">
         Don't have an account?{' '}
-        <Link to="/auth/signup" className="text-[var(--color-primary)] hover:underline">
+        <Link to="/auth/signup" className="text-[var(--color-primary)] hover:underline font-medium">
           Sign up
         </Link>
       </p>

@@ -1,5 +1,6 @@
 import { supabase } from './supabase'
 import { User, Course, Assessment, courses as mockCourses, assessments as mockAssessments, users as mockUsers } from './mockData'
+import { Department } from './constants'
 
 // Check if Supabase is properly configured
 const isSupabaseConfigured = () => {
@@ -11,7 +12,6 @@ const isSupabaseConfigured = () => {
 // Auth helpers with mock fallback
 export async function signIn(email: string, password: string): Promise<{ user: User }> {
   if (!isSupabaseConfigured()) {
-    // Fallback to mock data
     const found = mockUsers.find(u => u.email === email)
     if (found) return { user: found }
     return { user: mockUsers[0] }
@@ -38,19 +38,34 @@ export async function signIn(email: string, password: string): Promise<{ user: U
   }
 }
 
-export async function signUp(data: { email: string; name: string; department: string }): Promise<{ user: User }> {
+export interface OnboardingData {
+  email: string
+  name: string
+  department: Department
+  password: string
+  role: 'ADMIN' | 'TRAINER' | 'TRAINEE'
+  airline: string
+  discord: string
+  region: string
+  experience: string
+  heardAbout: string
+}
+
+export async function signUp(data: OnboardingData): Promise<{ user: User }> {
   if (!isSupabaseConfigured()) {
-    // Fallback to mock data
     const newUser: User = {
       id: String(mockUsers.length + 1),
       email: data.email,
       name: data.name,
-      role: 'TRAINEE',
-      department: data.department as any,
-      airline: 'SkyTeam Aviation',
+      role: data.role as any,
+      department: data.department,
+      airline: data.airline || 'SkyTeam Aviation',
+      discord: data.discord || '',
+      region: data.region || 'North America',
+      joinedDate: new Date().toISOString().split('T')[0],
       avatar: null,
       progress: 0,
-      joinedDate: new Date().toISOString().split('T')[0]
+      onboarded: true
     }
     mockUsers.push(newUser)
     return { user: newUser }
@@ -59,15 +74,38 @@ export async function signUp(data: { email: string; name: string; department: st
   try {
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: data.email,
-      password: 'tempPassword123!',
-      options: { data: { name: data.name, department: data.department } }
+      password: data.password,
+      options: {
+        data: {
+          name: data.name,
+          department: data.department,
+          role: data.role,
+          airline: data.airline,
+          discord: data.discord,
+          region: data.region,
+          experience: data.experience,
+          heard_about: data.heardAbout
+        }
+      }
     })
     if (authError) throw authError
     if (!authData.user) throw new Error('No user returned')
 
     const { data: profile, error: profileError } = await supabase
       .from('users')
-      .insert({ email: data.email, name: data.name, role: 'TRAINEE', department: data.department, airline: 'SkyTeam Aviation' })
+      .insert({
+        email: data.email,
+        name: data.name,
+        role: data.role,
+        department: data.department,
+        airline: data.airline || 'SkyTeam Aviation',
+        discord: data.discord,
+        region: data.region,
+        experience: data.experience,
+        heard_about: data.heardAbout,
+        avatar: null,
+        progress: 0
+      })
       .select()
       .single()
 
@@ -79,12 +117,15 @@ export async function signUp(data: { email: string; name: string; department: st
       id: String(mockUsers.length + 1),
       email: data.email,
       name: data.name,
-      role: 'TRAINEE',
-      department: data.department as any,
-      airline: 'SkyTeam Aviation',
+      role: data.role as any,
+      department: data.department,
+      airline: data.airline || 'SkyTeam Aviation',
+      discord: data.discord || '',
+      region: data.region || 'North America',
+      joinedDate: new Date().toISOString().split('T')[0],
       avatar: null,
       progress: 0,
-      joinedDate: new Date().toISOString().split('T')[0]
+      onboarded: true
     }
     mockUsers.push(newUser)
     return { user: newUser }
@@ -306,3 +347,4 @@ export async function getTrainees(department?: string): Promise<{ trainees: any[
 }
 
 export { supabase }
+export { isSupabaseConfigured }
