@@ -9,9 +9,9 @@ export const DEPARTMENTS = {
 export type Department = typeof DEPARTMENTS[keyof typeof DEPARTMENTS]
 
 export const ROLE_COLORS: Record<Department, string> = {
-  FLIGHT_DECK: '#0066cc',
-  CABIN_CREW: '#30a46c',
-  GROUND_CREW: '#d4a843'
+  FLIGHT_DECK: '#9b5b32',
+  CABIN_CREW: '#4f8a4a',
+  GROUND_CREW: '#c9822f'
 }
 
 export const ROLE_NAMES: Record<Department, string> = {
@@ -41,21 +41,21 @@ export const departmentInfo: Record<Department, DepartmentInfo> = {
     id: 'FLIGHT_DECK',
     name: 'Flight Deck',
     icon: Plane,
-    color: '#0f52ba',
+    color: '#9b5b32',
     description: 'Master flight operations, navigation, and aircraft handling.'
   },
   CABIN_CREW: {
     id: 'CABIN_CREW',
     name: 'Cabin Crew',
     icon: Users,
-    color: '#059669',
+    color: '#4f8a4a',
     description: 'Learn passenger service, safety protocols, and in-flight procedures.'
   },
   GROUND_CREW: {
     id: 'GROUND_CREW',
     name: 'Ground Crew',
     icon: Shield,
-    color: '#d97706',
+    color: '#c9822f',
     description: 'Master airport operations, vehicle handling, and ground procedures.'
   }
 }

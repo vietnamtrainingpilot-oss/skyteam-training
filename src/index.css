@@ -9,49 +9,51 @@
    Swiss precision meets aviation excellence
    ══════════════════════════════════════════════ */
 
-/* Light theme — warm neutral palette */
+/* Light theme — Artistic design system (warm paper, expressive serif, amber-brown accent) */
 :root {
-  --bg: #fafaf8;
-  --surface: #ffffff;
-  --surface-raised: #f4f3f0;
-  --fg: #1a1a18;
-  --fg-2: #3a3a36;
-  --muted: #6b6b64;
-  --meta: #9a9a90;
-  --border: #e4e3de;
-  --border-soft: #eeeeec;
-  --accent: #b8760e;
-  --accent-hover: #965f0a;
-  --accent-light: #fdf6e8;
-  --accent-surface: #fef9f0;
-  --success: #1a8a54;
-  --success-light: #ecf7f0;
-  --warning: #b8760e;
-  --warning-light: #fdf6e8;
-  --danger: #c0392b;
-  --danger-light: #fdecea;
+  --bg: #fbf6ee;
+  --surface: #fffdf8;
+  --surface-raised: #f1e3cf;
+  --fg: #201914;
+  --fg-2: #4c4037;
+  --muted: #7a6d63;
+  --meta: #9b5b32;
+  --border: #ded2c3;
+  --border-soft: #eee4d7;
+  --accent: #9b5b32;
+  --accent-on: #ffffff;
+  --accent-hover: color-mix(in oklab, var(--accent), black 8%);
+  --accent-active: color-mix(in oklab, var(--accent), black 14%);
+  --accent-light: #fbf0e3;
+  --accent-surface: #fdf6ee;
+  --success: #4f8a4a;
+  --success-light: #eaf4ea;
+  --warning: #c9822f;
+  --warning-light: #fdf3e3;
+  --danger: #b33a3a;
+  --danger-light: #fbe9e9;
   --violet: #7c3aed;
   --violet-light: #f3f0ff;
 
   /* ── Department Colors ── */
-  --color-flight-deck: #3b82f6;
-  --color-cabin-crew: #10b981;
-  --color-ground-crew: #f59e0b;
+  --color-flight-deck: #9b5b32;
+  --color-cabin-crew: #4f8a4a;
+  --color-ground-crew: #c9822f;
   --color-shared-core: #8b5cf6;
 
-  /* ── Shadows (elevated, multi-layer) ── */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.35);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.4);
-  --shadow-xl: 0 20px 50px rgba(0,0,0,0.5);
-  --shadow-accent: 0 4px 14px rgba(217,119,6,0.2);
-  --shadow-inner: inset 0 1px 3px rgba(0,0,0,0.3);
+  /* ── Shadows (warm-tinted, multi-layer) ── */
+  --shadow-xs: 0 1px 2px rgba(32,25,20,0.25);
+  --shadow-sm: 0 2px 6px rgba(32,25,20,0.18);
+  --shadow-md: 0 8px 24px rgba(32,25,20,0.16);
+  --shadow-lg: 0 18px 44px rgba(32,25,20,0.22);
+  --shadow-xl: 0 28px 64px rgba(32,25,20,0.28);
+  --shadow-accent: 0 8px 24px rgba(155,91,50,0.30);
+  --shadow-inner: inset 0 1px 3px rgba(32,25,20,0.12);
 
   /* ── Typography ── */
-  --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
-  --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
-  --font-mono: 'SF Mono', ui-monospace, Menlo, monospace;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "SF Mono", ui-monospace, Menlo, monospace;
 
   --text-xs: 12px;
   --text-sm: 14px;
@@ -61,6 +63,10 @@
   --text-2xl: 28px;
   --text-3xl: 40px;
   --text-4xl: 56px;
+
+  --leading-tight: 1;
+  --leading-body: 1.6;
+  --tracking-display: -0.025em;
 
   /* ── Spacing ── */
   --space-1: 4px;
@@ -74,20 +80,24 @@
   --space-12: 48px;
   --space-16: 64px;
 
+  --section-y-desktop: 112px;
+  --section-y-tablet: 80px;
+  --section-y-phone: 56px;
+
   /* ── Radius ── */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
-  --radius-2xl: 28px;
-  --radius-pill: 980px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 24px;
+  --radius-2xl: 24px;
+  --radius-pill: 9999px;
 
   /* ── Transitions ── */
   --duration-fast: 150ms;
-  --duration-normal: 220ms;
+  --duration-normal: 240ms;
   --duration-slow: 350ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-standard: cubic-bezier(0.28, 0, 0.22, 1);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* Color-scheme for light mode */

@@ -25,7 +25,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
         />
         <div
           className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full blur-3xl opacity-8"
-          style={{ background: 'radial-gradient(circle, var(--color-cabin-crew, #059669) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--color-cabin-crew, #4f8a4a) 0%, transparent 70%)' }}
         />
       </div>
 

@@ -4,23 +4,24 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-        mono: ['"SF Mono"', '"Monaco"', '"Inconsolata"', '"Fira Mono"', 'monospace']
+        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        display: ['Georgia', '"Times New Roman"', 'serif'],
+        mono: ['"SF Mono"', '"Monaco"', '"Inconsolata"', 'monospace']
       },
       colors: {
         primary: {
-          DEFAULT: '#0066cc',
-          hover: '#0052a3',
-          light: '#e8f0fe',
+          DEFAULT: '#9b5b32',
+          hover: '#834826',
+          light: '#fbf0e3',
           fg: '#ffffff'
         },
-        'flight-deck': '#0066cc',
-        'cabin-crew': '#30a46c',
-        'ground-crew': '#d4a843',
-        'shared-core': '#7c3aed',
-        success: '#30a46c',
-        warning: '#d4a843',
-        error: '#de3f2f'
+        'flight-deck': '#9b5b32',
+        'cabin-crew': '#4f8a4a',
+        'ground-crew': '#c9822f',
+        'shared-core': '#8b5cf6',
+        success: '#4f8a4a',
+        warning: '#c9822f',
+        error: '#b33a3a'
       }
     }
   },
