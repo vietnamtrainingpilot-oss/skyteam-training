@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,21 +9,23 @@
    Swiss precision meets aviation excellence
    ══════════════════════════════════════════════ */
 
-/* Light theme — Artistic design system (warm paper, expressive serif, amber-brown accent) */
+/* Light theme — Artistic design system (warm paper, expressive type, amber-brown accent) */
 :root {
   --bg: #fbf6ee;
   --surface: #fffdf8;
   --surface-raised: #f1e3cf;
   --fg: #201914;
+  --fg-rgb: 32, 25, 20;
   --fg-2: #4c4037;
   --muted: #7a6d63;
   --meta: #9b5b32;
   --border: #ded2c3;
   --border-soft: #eee4d7;
   --accent: #9b5b32;
+  --accent-rgb: 155, 91, 50;
   --accent-on: #ffffff;
-  --accent-hover: color-mix(in oklab, var(--accent), black 8%);
-  --accent-active: color-mix(in oklab, var(--accent), black 14%);
+  --accent-hover: color-mix(in srgb, var(--accent) 92%, black);
+  --accent-active: color-mix(in srgb, var(--accent) 86%, black);
   --accent-light: #fbf0e3;
   --accent-surface: #fdf6ee;
   --success: #4f8a4a;
@@ -36,24 +38,24 @@
   --violet-light: #f3f0ff;
 
   /* ── Department Colors ── */
-  --color-flight-deck: #9b5b32;
-  --color-cabin-crew: #4f8a4a;
-  --color-ground-crew: #c9822f;
-  --color-shared-core: #8b5cf6;
+  --color-flight-deck: var(--accent);
+  --color-cabin-crew: var(--success);
+  --color-ground-crew: var(--warning);
+  --color-shared-core: var(--violet);
 
-  /* ── Shadows (warm-tinted, multi-layer) ── */
-  --shadow-xs: 0 1px 2px rgba(32,25,20,0.25);
-  --shadow-sm: 0 2px 6px rgba(32,25,20,0.18);
-  --shadow-md: 0 8px 24px rgba(32,25,20,0.16);
-  --shadow-lg: 0 18px 44px rgba(32,25,20,0.22);
-  --shadow-xl: 0 28px 64px rgba(32,25,20,0.28);
-  --shadow-accent: 0 8px 24px rgba(155,91,50,0.30);
-  --shadow-inner: inset 0 1px 3px rgba(32,25,20,0.12);
+  /* ── Shadows (warm-tinted, diffuse) ── */
+  --shadow-xs: 0 1px 2px rgba(var(--fg-rgb), 0.06);
+  --shadow-sm: 0 8px 24px rgba(var(--fg-rgb), 0.06);
+  --shadow-md: 0 20px 40px -15px rgba(var(--fg-rgb), 0.08);
+  --shadow-lg: 0 28px 64px -20px rgba(var(--fg-rgb), 0.1);
+  --shadow-xl: 0 36px 80px -24px rgba(var(--fg-rgb), 0.12);
+  --shadow-accent: 0 12px 28px rgba(var(--accent-rgb), 0.18);
+  --shadow-inner: inset 0 1px 3px rgba(var(--fg-rgb), 0.06);
 
   /* ── Typography ── */
-  --font-display: Georgia, "Times New Roman", serif;
-  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "SF Mono", ui-monospace, Menlo, monospace;
+  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --text-xs: 12px;
   --text-sm: 14px;
@@ -85,19 +87,19 @@
   --section-y-phone: 56px;
 
   /* ── Radius ── */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 24px;
-  --radius-2xl: 24px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-xl: 36px;
+  --radius-2xl: 40px;
   --radius-pill: 9999px;
 
   /* ── Transitions ── */
-  --duration-fast: 150ms;
-  --duration-normal: 240ms;
-  --duration-slow: 350ms;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 700ms;
+  --duration-normal: 850ms;
+  --duration-slow: 1000ms;
+  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-standard: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 /* Color-scheme for light mode */
@@ -129,7 +131,7 @@ html {
   --color-danger-light: var(--danger-light);
   --color-violet: var(--violet);
   --color-violet-light: var(--violet-light);
-  --color-primary-dark: #92400e;
+  --color-primary-dark: var(--accent-active);
   --color-separator: var(--color-border);
   --surface-hover: var(--surface-raised);
 }
@@ -165,25 +167,26 @@ body {
 /* Skip to content link for keyboard users */
 .skip-link {
   position: absolute;
-  top: -100%;
+  top: 12px;
   left: 16px;
   z-index: 9999;
   padding: 8px 16px;
   background: var(--color-primary);
-  color: white;
+  color: var(--accent-on);
   font-weight: 600;
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: top 0.15s;
+  transform: translateY(-150%);
+  transition: transform var(--duration-fast) var(--ease-standard);
 }
 .skip-link:focus {
-  top: 12px;
+  transform: translateY(0);
   outline: 2px solid var(--color-fg);
   outline-offset: 2px;
 }
 
 ::selection {
-  background: rgba(217, 119, 6, 0.15);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
   color: var(--color-fg);
 }
 
@@ -257,7 +260,10 @@ body {
   font-weight: 500;
   font-family: var(--font-body);
   border-radius: var(--radius-pill);
-  transition: all var(--duration-fast) var(--ease-standard);
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
   cursor: pointer;
   border: none;
   text-decoration: none;
@@ -272,14 +278,14 @@ body {
 
 .btn-pill-primary {
   background: var(--color-primary);
-  color: white;
+  color: var(--accent-on);
   box-shadow: var(--shadow-accent);
 }
 
 .btn-pill-primary:hover {
   background: var(--color-primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(217,119,6,0.25);
+  box-shadow: var(--shadow-accent);
 }
 
 .btn-pill-primary:active {
@@ -294,7 +300,7 @@ body {
 
 .btn-pill-secondary:hover {
   background: var(--color-primary);
-  color: white;
+  color: var(--accent-on);
 }
 
 /* ══════════════════════════════════════════════
@@ -318,7 +324,9 @@ body {
   color: var(--color-muted);
   text-decoration: none;
   border-radius: var(--radius-md);
-  transition: all var(--duration-fast) var(--ease-standard);
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
   letter-spacing: -0.01em;
 }
 
@@ -346,7 +354,7 @@ body {
 .input {
   width: 100%;
   padding: 9px 14px;
-  font-size: 14px;
+  font-size: 16px;
   font-family: var(--font-body);
   color: var(--color-fg);
   background: var(--color-bg);
@@ -359,7 +367,7 @@ body {
 
 .input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(217,119,6,0.1);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.12);
 }
 
 .input::placeholder {
@@ -368,7 +376,7 @@ body {
 
 select.input {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a6d63' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 36px;
@@ -409,13 +417,19 @@ textarea.input {
 }
 
 /* Typography polish — display tracking and body leading */
-.text-display { font-family: var(--font-display); letter-spacing: -0.025em; }
+.text-display {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+}
 .text-display-sm { font-family: var(--font-display); letter-spacing: -0.02em; }
 .font-display { font-family: var(--font-display); }
 .font-display-heading {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .prose h3 {
